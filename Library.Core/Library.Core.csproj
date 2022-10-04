@@ -6,4 +6,24 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Books\Queries\GetAll\" />
+    <Folder Include="Books\Queries\GetById\" />
+    <Folder Include="Categories\Commands\Create\" />
+    <Folder Include="Categories\Commands\Remove\" />
+    <Folder Include="Categories\Commands\Update\" />
+    <Folder Include="Categories\Queries\GetAll\" />
+    <Folder Include="Categories\Queries\GetById\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="11.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Library.Domain\Library.Domain.csproj" />
+    <ProjectReference Include="..\Library.Infastructure\Library.Infastructure.csproj" />
+  </ItemGroup>
+
 </Project>
