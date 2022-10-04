@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.Infastructure.Data.Repositories.Query
+namespace Library.Infastructure.Data.Repositories.Query.Implementation
 {
     public class BookRepositoryQuery
     {

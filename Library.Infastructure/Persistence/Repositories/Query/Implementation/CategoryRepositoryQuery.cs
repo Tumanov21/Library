@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Entities;
+using Library.Infastructure.Data.Repositories.Query.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.Infastructure.Data.Repositories.Query
+namespace Library.Infastructure.Data.Repositories.Query.Implementation
 {
-    public class CategoryRepositoryQuery
+    public class CategoryRepositoryQuery : ICategoryRepositoryQuery
     {
         private readonly EFContext _context;
 

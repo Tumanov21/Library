@@ -1,12 +1,12 @@
 ﻿using Library.Domain.Entities;
-using Library.Infastructure.Data.Repositories.Query;
+using Library.Infastructure.Data.Repositories.Query.Implementation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.Infastructure.Data.Repositories.Command
+namespace Library.Infastructure.Data.Repositories.Command.Implementation
 {
     public class BookRepositoryCommand
     {
