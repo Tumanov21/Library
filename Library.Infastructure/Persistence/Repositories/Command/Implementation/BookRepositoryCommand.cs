@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Entities;
+using Library.Infastructure.Data.Repositories.Command.Interface;
 using Library.Infastructure.Data.Repositories.Query.Implementation;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Library.Infastructure.Data.Repositories.Command.Implementation
 {
-    public class BookRepositoryCommand
+    public class BookRepositoryCommand: IBookRepositoryCommand
     {
         private readonly EFContext _context;
         private readonly BookRepositoryQuery _bookRepositoryQuery;
