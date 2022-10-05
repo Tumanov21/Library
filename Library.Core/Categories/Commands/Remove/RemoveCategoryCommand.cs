@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.Core.Books.Commands.Remove
+namespace Library.Core.Categories.Commands.Remove
 {
-    public record RemoveBookCommand(int Id):IRequest;
+    public record RemoveCategoryCommand(int id):IRequest;
 }

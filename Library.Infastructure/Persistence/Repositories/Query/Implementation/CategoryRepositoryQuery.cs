@@ -18,7 +18,7 @@ namespace Library.Infastructure.Data.Repositories.Query.Implementation
         public async Task<IReadOnlyCollection<Category>> GetAll()
             => await _context.Category.ToListAsync();
 
-        public async Task<Category?> GetOne(Guid Id)
+        public async Task<Category?> GetById(int Id)
             => await _context.Category.SingleOrDefaultAsync(c => c.Id == Id);
     }
 }

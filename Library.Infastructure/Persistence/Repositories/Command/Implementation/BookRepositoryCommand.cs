@@ -33,7 +33,7 @@ namespace Library.Infastructure.Data.Repositories.Command.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public async Task Remove(Guid id)
+        public async Task Remove(int id)
         {
             var model = await _bookRepositoryQuery.GetOne(id);
             _context.Book.Remove(model);
