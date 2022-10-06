@@ -1,23 +1,27 @@
 ﻿using Library.Domain.Entities;
-using Library.Infastructure.Data.Repositories.Command.Interface;
-using Library.Infastructure.Data.Repositories.Query.Implementation;
+using Library.Infastructure.Persistence.Repositories.Command.Interface;
+using Library.Infastructure.Persistence.Repositories.Query.Implementation;
+using Library.Infastructure.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Library.Infastructure.Persistence.Repositories.Query.Interface;
 
-namespace Library.Infastructure.Data.Repositories.Command.Implementation
+namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
 {
     public class CategoryRepositoryCommand: ICategoryRepositoryCommand
     {
         private readonly EFContext _context;
-        private readonly CategoryRepositoryQuery _categoryRepositoryQuery;
+        private readonly ICategoryRepositoryCommand _categoryRepositoryCommand;
+        private readonly ICategoryRepositoryQuery _categoryRepositoryQuery;
 
-        public CategoryRepositoryCommand(CategoryRepositoryQuery categoryRepositoryQuery, EFContext context)
+        public CategoryRepositoryCommand(EFContext context, ICategoryRepositoryCommand categoryRepositoryCommand, ICategoryRepositoryQuery categoryRepositoryQuery)
         {
-            _categoryRepositoryQuery = categoryRepositoryQuery;
             _context = context;
+            _categoryRepositoryCommand = categoryRepositoryCommand;
+            _categoryRepositoryQuery = categoryRepositoryQuery;
         }
 
         public async Task Add(Category category)
@@ -28,14 +32,14 @@ namespace Library.Infastructure.Data.Repositories.Command.Implementation
 
         public async Task Update(Category category)
         {
-            var model = await _categoryRepositoryQuery.GetOne(category.Id);
+            var model = await _categoryRepositoryQuery.GetById(category.Id);
             category.Title = model.Title;
             await _context.SaveChangesAsync();
         }
 
         public async Task Remove(int Id)
         {
-            var model = await _categoryRepositoryQuery.GetOne(Id);
+            var model = await _categoryRepositoryQuery.GetById(Id);
             _context.Category.Remove(model);
             await _context.SaveChangesAsync();
         }

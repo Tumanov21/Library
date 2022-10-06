@@ -1,6 +1,6 @@
 ﻿using Library.Domain.Entities;
 
-namespace Library.Infastructure.Data.Repositories.Query.Interface
+namespace Library.Infastructure.Persistence.Repositories.Query.Interface
 {
     public interface ICategoryRepositoryQuery
     {

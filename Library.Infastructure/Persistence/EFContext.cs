@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Library.Infastructure.Data
+namespace Library.Infastructure.Persistence
 {
     public class EFContext:DbContext
     {

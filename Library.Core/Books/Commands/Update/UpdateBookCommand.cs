@@ -8,16 +8,5 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Books.Commands.Update
 {
-    public class UpdateBookCommand
-    {
-        public class Request : IRequest<Response>
-        {
-            public Book Book { get; set; }
-        }
-
-        public class Response
-        {
-            public Book Book { get; set; }
-        }
-    }
+    public record UpdateBookCommand(Book Book):IRequest;
 }

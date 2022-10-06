@@ -1,6 +1,6 @@
 ﻿using Library.Domain.Entities;
 
-namespace Library.Infastructure.Data.Repositories.Command.Interface
+namespace Library.Infastructure.Persistence.Repositories.Command.Interface
 {
     public interface IBookRepositoryCommand
     {

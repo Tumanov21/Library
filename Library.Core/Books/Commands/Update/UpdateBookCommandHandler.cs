@@ -1,4 +1,4 @@
-﻿using Library.Infastructure.Data.Repositories.Command.Interface;
+﻿using Library.Infastructure.Persistence.Repositories.Command.Interface;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Books.Commands.Update
 {
-    public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand.Request, UpdateBookCommand.Response>
+    public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand>
     {
         private readonly IBookRepositoryCommand _bookRepositoryCommand;
 
@@ -17,9 +17,10 @@ namespace Library.Core.Books.Commands.Update
             _bookRepositoryCommand = bookRepositoryCommand;
         }
 
-        public async Task<UpdateBookCommand.Response> Handle(UpdateBookCommand.Request request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
         {
-            await _bookRepositoryCommand.Update(request.Id);
+            await _bookRepositoryCommand.Update(request.Book);
+            return Unit.Value;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Library.Infastructure.Data.Repositories.Command.Interface;
+﻿using Library.Infastructure.Persistence.Repositories.Command.Interface;
 using MediatR;
 using System;
 using System.Collections.Generic;

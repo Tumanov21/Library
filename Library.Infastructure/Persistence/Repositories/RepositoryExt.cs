@@ -1,7 +1,7 @@
-﻿using Library.Infastructure.Data.Repositories.Command.Implementation;
-using Library.Infastructure.Data.Repositories.Command.Interface;
-using Library.Infastructure.Data.Repositories.Query.Implementation;
-using Library.Infastructure.Data.Repositories.Query.Interface;
+﻿using Library.Infastructure.Persistence.Repositories.Command.Implementation;
+using Library.Infastructure.Persistence.Repositories.Command.Interface;
+using Library.Infastructure.Persistence.Repositories.Query.Implementation;
+using Library.Infastructure.Persistence.Repositories.Query.Interface;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
