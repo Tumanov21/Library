@@ -12,12 +12,10 @@ namespace Library.Infastructure.Persistence.Repositories.Query.Implementation
 {
     public class BookRepositoryQuery: IBookRepositoryQuery
     {
-        private readonly IBookRepositoryQuery _bookRepositoryQuery;
         private readonly EFContext _context;
-        public BookRepositoryQuery(EFContext context, IBookRepositoryQuery bookRepositoryQuery)
+        public BookRepositoryQuery(EFContext context)
         {
             _context = context;
-            _bookRepositoryQuery = bookRepositoryQuery;
         }
 
         public async Task<IReadOnlyCollection<Book>> GetAll()

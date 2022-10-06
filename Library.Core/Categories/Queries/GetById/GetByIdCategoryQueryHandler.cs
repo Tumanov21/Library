@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Categories.Queries.GetById
 {
-    //public class GetByIdCategoryQueryHandler : IRequestHandler<GetByIdCategoryQuery.Request, GetByIdCategoryQuery.Response>
-    //{
-    //    private readonly ICategoryRepositoryQuery _categoryRepositoryQuery;
+    public class GetByIdCategoryQueryHandler : IRequestHandler<GetByIdCategoryQuery.Request, GetByIdCategoryQuery.Response>
+    {
+        private readonly ICategoryRepositoryQuery _categoryRepositoryQuery;
 
-    //    public GetByIdCategoryQueryHandler(ICategoryRepositoryQuery categoryRepositoryQuery)
-    //    {
-    //        _categoryRepositoryQuery = categoryRepositoryQuery;
-    //    }
+        public GetByIdCategoryQueryHandler(ICategoryRepositoryQuery categoryRepositoryQuery)
+        {
+            _categoryRepositoryQuery = categoryRepositoryQuery;
+        }
 
-    //    public async Task<GetByIdCategoryQuery.Response> Handle(GetByIdCategoryQuery.Request request, CancellationToken cancellationToken)
-    //        => new GetByIdCategoryQuery.Response()
-    //        {
-    //            Category = await _categoryRepositoryQuery.GetById(request.Id)
-    //        };
-    //}
+        public async Task<GetByIdCategoryQuery.Response> Handle(GetByIdCategoryQuery.Request request, CancellationToken cancellationToken)
+            => new GetByIdCategoryQuery.Response()
+            {
+                Category = await _categoryRepositoryQuery.GetById(request.Id)
+            };
+    }
 }

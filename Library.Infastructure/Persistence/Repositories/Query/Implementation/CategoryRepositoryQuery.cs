@@ -13,12 +13,10 @@ namespace Library.Infastructure.Persistence.Repositories.Query.Implementation
     public class CategoryRepositoryQuery : ICategoryRepositoryQuery
     {
         private readonly EFContext _context;
-        private readonly ICategoryRepositoryQuery _categoryRepositoryQuery;
 
-        public CategoryRepositoryQuery(EFContext context, ICategoryRepositoryQuery categoryRepositoryQuery)
+        public CategoryRepositoryQuery(EFContext context)
         {
             _context = context;
-            _categoryRepositoryQuery = categoryRepositoryQuery;
         }
 
         public async Task<IReadOnlyCollection<Category>> GetAll()

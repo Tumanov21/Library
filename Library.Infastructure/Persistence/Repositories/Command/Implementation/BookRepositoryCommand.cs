@@ -8,20 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Library.Infastructure.Persistence.Repositories.Query.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
 {
     public class BookRepositoryCommand: IBookRepositoryCommand
     {
         private readonly EFContext _context;
-        private readonly IBookRepositoryQuery _bookRepositoryQuery;
-        private readonly IBookRepositoryCommand _bookRepositoryCommand;
 
-        public BookRepositoryCommand(EFContext context, IBookRepositoryCommand bookRepositoryQuery, IBookRepositoryCommand bookRepositoryCommand)
+        public BookRepositoryCommand(EFContext context)
         {
             _context = context;
-            _bookRepositoryQuery = _bookRepositoryQuery;
-            _bookRepositoryCommand = _bookRepositoryCommand;
         }
 
         public async Task Add(Book book)
@@ -32,14 +29,14 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
 
         public async Task Update(Book book)
         {
-            var model = await _bookRepositoryQuery.GetById(book.Id);
+            var model = await _context.Book.SingleOrDefaultAsync(c => c.Id == book.Id);
             book.Title = model?.Title;
             await _context.SaveChangesAsync();
         }
 
         public async Task Remove(int id)
         {
-            var model = await _bookRepositoryQuery.GetById(id);
+            var model = await _context.Book.SingleOrDefaultAsync(c => c.Id == id);
             _context.Book.Remove(model);
             await _context.SaveChangesAsync();
         }
