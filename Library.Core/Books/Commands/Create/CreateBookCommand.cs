@@ -13,6 +13,7 @@ namespace Library.Core.Books.Commands.Create
         public class Request : IRequest<Unit>
         {
             public Book Book { get; set; }
+            public Category Category { get; set; }
         }
     }
 }

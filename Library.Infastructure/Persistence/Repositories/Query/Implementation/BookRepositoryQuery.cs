@@ -19,10 +19,16 @@ namespace Library.Infastructure.Persistence.Repositories.Query.Implementation
         }
 
         public async Task<IReadOnlyCollection<Book>> GetAll()
-            => await _context.Book.ToListAsync();
+            => await _context.Book
+            .Include(c=>c.BooksCategories)
+            .ThenInclude(c=>c.Category)
+            .ToListAsync();
 
         public async Task<Book?> GetById(int id)
-            => await _context.Book.SingleOrDefaultAsync(c => c.Id == id);
+            => await _context.Book
+            .Include(c=>c.BooksCategories)
+            .ThenInclude(c=>c.Category)
+            .SingleOrDefaultAsync(c => c.Id == id);
     }
 
 }

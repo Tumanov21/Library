@@ -9,15 +9,14 @@ using System.Threading.Tasks;
 
 namespace Library.Infastructure.Persistence.Configurations
 {
-    public class CategoryConfiguration : IEntityTypeConfiguration<Category>
+    public class BooksCategoriesConfiguration : IEntityTypeConfiguration<BooksCategories>
     {
-        public void Configure(EntityTypeBuilder<Category> builder)
+        public void Configure(EntityTypeBuilder<BooksCategories> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.HasData(new Category()
+            builder.HasData(new BooksCategories()
             {
-                Id = 1,
-                Title = "Title"
+                CategoryId = 1,
+                BookId = 1,
             });
         }
     }
