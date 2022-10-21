@@ -7,28 +7,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Library.Infrastructure.Persistence.Dto.BookDto;
 
 namespace Library.Infastructure.Persistence.Repositories.Query.Implementation
 {
     public class BookRepositoryQuery: IBookRepositoryQuery
     {
         private readonly EFContext _context;
-        public BookRepositoryQuery(EFContext context)
+        private readonly IMapper _mapper;
+        public BookRepositoryQuery(EFContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<IReadOnlyCollection<Book>> GetAll()
-            => await _context.Book
-            .Include(c=>c.BooksCategories)
-            .ThenInclude(c=>c.Category)
-            .ToListAsync();
+        public async Task<IReadOnlyCollection<GetBookDto>> GetAll()
+        {
+            var result = await _context.Book.ToListAsync();
+            return _mapper.Map<IReadOnlyCollection<GetBookDto>>(result);
+        }
 
-        public async Task<Book?> GetById(int id)
-            => await _context.Book
-            .Include(c=>c.BooksCategories)
-            .ThenInclude(c=>c.Category)
-            .SingleOrDefaultAsync(c => c.Id == id);
+        public async Task<GetBookDto> GetById(int id)
+        {
+            var result = await _context.Book.SingleOrDefaultAsync(c => c.Id == id);
+            return _mapper.Map<GetBookDto>(result);
+        }
     }
 
 }

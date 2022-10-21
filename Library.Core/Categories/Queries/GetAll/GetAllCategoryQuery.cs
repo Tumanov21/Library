@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Entities;
+using Library.Infrastructure.Persistence.Dtos.CategoryDtos;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Library.Core.Categories.Queries.GetAll
         }
         public class Response
         {
-            public IReadOnlyCollection<Category> Categories { get; set; }
+            public IReadOnlyCollection<GetCategoryDto> Categories { get; set; }
         }
     }
 }

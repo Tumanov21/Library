@@ -1,6 +1,7 @@
 using Library.Core;
 using Library.Infastructure.Persistence;
 using Library.Infastructure.Persistence.Repositories;
+using Library.Infrastructure.Persistence.Mapping;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -32,6 +33,7 @@ builder.Services.AddDbContext<EFContext>(options =>
 builder.Services.AddMediatR(typeof(Anchor));
 //builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddRepositories();
+builder.Services.AddAutoMapper(typeof(BookProfile));
 
 builder.Services.ConfigureSwaggerGen(c => c.SchemaGeneratorOptions.SchemaIdSelector = x => x.ToFriendlyName());
 var app = builder.Build();

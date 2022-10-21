@@ -14,7 +14,6 @@ namespace Library.Infastructure.Persistence
     {
         public EFContext(DbContextOptions<EFContext> options) : base(options)
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         public DbSet<Book> Book { get; set; }

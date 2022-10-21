@@ -4,6 +4,8 @@ using Library.Core.Books.Commands.Update;
 using Library.Core.Books.Queries.GetAll;
 using Library.Core.Books.Queries.GetById;
 using Library.Domain.Entities;
+using Library.Infrastructure.Persistence.Dto.BookDto;
+using Library.Infrastructure.Persistence.Dtos.BookDtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -34,11 +36,11 @@ namespace Library.API.Controllers
             => await _mediator.Send(new GetByIdBookQuery.Request { Id = Id });
 
         [HttpPost("Add")]
-        public async Task<Unit> Add(Book book)
-            => await _mediator.Send(new CreateBookCommand.Request { Book = book });
+        public async Task<Unit> Add(AddBookDto book)
+            => await _mediator.Send(new CreateBookCommand(book));
 
         [HttpPut("Update")]
-        public async Task<Unit> Update(Book book)
+        public async Task<Unit> Update(UpdateBookDto book)
             => await _mediator.Send(new UpdateBookCommand(book));
 
         [HttpDelete("Delete")]

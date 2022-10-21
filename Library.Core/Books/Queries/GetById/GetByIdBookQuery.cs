@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Entities;
+using Library.Infrastructure.Persistence.Dto.BookDto;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Library.Core.Books.Queries.GetById
         }
         public class Response
         {
-            public Book Book { get; set; }
+            public GetBookDto Book { get; set; }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Entities;
+using Library.Infrastructure.Persistence.Dtos.CategoryDtos;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Categories.Commands.Create
 {
-    public record CreateCategoryCommand(Category Category):IRequest;
+    public record CreateCategoryCommand(AddCategoryDto Category) :IRequest;
 }

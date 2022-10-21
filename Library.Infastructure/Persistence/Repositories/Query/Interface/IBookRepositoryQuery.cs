@@ -1,10 +1,11 @@
 ﻿using Library.Domain.Entities;
+using Library.Infrastructure.Persistence.Dto.BookDto;
 
 namespace Library.Infastructure.Persistence.Repositories.Query.Interface
 {
     public interface IBookRepositoryQuery
     {
-        Task<IReadOnlyCollection<Book>> GetAll();
-        Task<Book?> GetById(int id);
+        Task<IReadOnlyCollection<GetBookDto>> GetAll();
+        Task<GetBookDto> GetById(int id);
     }
 }

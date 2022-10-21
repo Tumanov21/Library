@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Entities;
+using Library.Infrastructure.Persistence.Dtos.CategoryDtos;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace Library.Core.Categories.Queries.GetById
         }
         public class Response
         {
-            public Category Category { get; set; }
+            public GetCategoryDto Category { get; set; }
         }
     }
 }

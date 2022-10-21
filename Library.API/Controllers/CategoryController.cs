@@ -1,4 +1,9 @@
-﻿using Library.Core.Categories.Queries.GetAll;
+﻿using Library.Core.Categories.Commands.Create;
+using Library.Core.Categories.Commands.Remove;
+using Library.Core.Categories.Commands.Update;
+using Library.Core.Categories.Queries.GetAll;
+using Library.Core.Categories.Queries.GetById;
+using Library.Infrastructure.Persistence.Dtos.CategoryDtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,5 +28,21 @@ namespace Library.API.Controllers
         [HttpGet("GetAllCategory")]
         public async Task<GetAllCategoryQuery.Response> GetAllCategory()
             => await _mediator.Send(new GetAllCategoryQuery.Request());
+
+        [HttpGet("GetById")]
+        public async Task<GetByIdCategoryQuery.Response> GetById(int id)
+            => await _mediator.Send(new GetByIdCategoryQuery.Request { Id = id });
+
+        [HttpPost("Add")]
+        public async Task<Unit> Add(AddCategoryDto categoryDto)
+            => await _mediator.Send(new CreateCategoryCommand(categoryDto));
+
+        [HttpPost("Update")]
+        public async Task<Unit> Update(UpdateCategoryDto categoryDto)
+            => await _mediator.Send(new UpdateCategoryCommand(categoryDto));
+
+        [HttpPost("Remove")]
+        public async Task<Unit> Delte(int id)
+            => await _mediator.Send(new RemoveCategoryCommand(id));
     }
 }

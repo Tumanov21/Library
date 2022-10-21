@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Books.Commands.Create
 {
-    public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand.Request>
+    public class CreateBookCommandHandler : IRequestHandler<CreateBookCommand>
     {
         private readonly IBookRepositoryCommand _bookRepositoryCommand;
 
@@ -17,9 +17,9 @@ namespace Library.Core.Books.Commands.Create
             _bookRepositoryCommand = bookRepositoryCommand;
         }
 
-        public async Task<Unit> Handle(CreateBookCommand.Request request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateBookCommand request, CancellationToken cancellationToken)
         {
-            await _bookRepositoryCommand.Add(request.Book);
+            await _bookRepositoryCommand.Add(request.BookDto);
             return Unit.Value;
         }
     }

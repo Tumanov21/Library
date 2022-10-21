@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Entities;
+using Library.Infrastructure.Persistence.Dto.BookDto;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,5 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Books.Commands.Create
 {
-    public class CreateBookCommand
-    {
-        public class Request : IRequest<Unit>
-        {
-            public Book Book { get; set; }
-            public Category Category { get; set; }
-        }
-    }
+    public record CreateBookCommand(AddBookDto BookDto) :IRequest;
 }
