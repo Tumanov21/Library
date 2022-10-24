@@ -44,7 +44,7 @@ namespace Library.API.Controllers
             => await _mediator.Send(new UpdateBookCommand.Request() { UpdateBookDto = book });
 
         [HttpDelete("Delete")]
-        public async Task<Unit> Remove(int Id)
-            => await _mediator.Send(new RemoveBookCommand(Id));
+        public async Task<RemoveBookCommand.Response> Remove(int Id)
+            => await _mediator.Send(new RemoveBookCommand.Request() { Id = Id});
     }
 }
