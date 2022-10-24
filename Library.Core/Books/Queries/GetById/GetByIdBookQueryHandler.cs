@@ -18,9 +18,17 @@ namespace Library.Core.Books.Queries.GetById
         }
 
         public async Task<GetByIdBookQuery.Response> Handle(GetByIdBookQuery.Request request, CancellationToken cancellationToken)
-            => new GetByIdBookQuery.Response()
+        {
+            if (request.Id == 0 || request.Id < 0)
+                return new GetByIdBookQuery.Response()
+                {
+                    Book = null
+                };
+
+            return new GetByIdBookQuery.Response()
             {
                 Book = await _bookRepositoryQuery.GetById(request.Id)
             };
+        }
     }
 }

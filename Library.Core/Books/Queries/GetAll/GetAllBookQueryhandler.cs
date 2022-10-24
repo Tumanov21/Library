@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Books.Queries.GetAll
 {
-    public class GetAllBookQueryhandler : IRequestHandler<GetAllBookQuery.Request, GetAllBookQuery.Response>
+    public class GetAllBookQueryHandler : IRequestHandler<GetAllBookQuery.Request, GetAllBookQuery.Response>
     {
         private readonly IBookRepositoryQuery _bookRepositoryQuery;
 
-        public GetAllBookQueryhandler(IBookRepositoryQuery bookRepositoryQuery)
+        public GetAllBookQueryHandler(IBookRepositoryQuery bookRepositoryQuery)
         {
             _bookRepositoryQuery = bookRepositoryQuery;
         }

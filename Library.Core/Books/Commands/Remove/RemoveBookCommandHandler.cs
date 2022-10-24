@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Books.Commands.Remove
 {
-    public class RemoveBookCommandHandler : IRequestHandler<RemoveBookCommand>
+    public class RemoveBookCommandHandler : IRequestHandler<RemoveBookCommand.Request,RemoveBookCommand.Response>
     {
         private readonly IBookRepositoryCommand _bookRepositoryCommand;
 
@@ -17,10 +17,18 @@ namespace Library.Core.Books.Commands.Remove
             _bookRepositoryCommand = bookRepositoryCommand;
         }
 
-        public async Task<Unit> Handle(RemoveBookCommand request, CancellationToken cancellationToken)
+        public async Task<RemoveBookCommand.Response> Handle(RemoveBookCommand.Request request, CancellationToken cancellationToken)
         {
-            await _bookRepositoryCommand.Remove(request.Id);
-            return Unit.Value;
+            if (request.Id ==0 || request.Id<0)
+                return new RemoveBookCommand.Response()
+                {
+                    Success = false
+                };
+
+            return new RemoveBookCommand.Response()
+            {
+                Success = await _bookRepositoryCommand.Remove(request.Id)
+            };
         }
     }
 }

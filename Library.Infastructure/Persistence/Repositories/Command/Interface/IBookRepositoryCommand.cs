@@ -6,8 +6,8 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Interface
 {
     public interface IBookRepositoryCommand
     {
-        Task Add(AddBookDto book);
-        Task Remove(int id);
-        Task Update(UpdateBookDto book);
+        Task<bool> Add(AddBookDto book);
+        Task<bool> Remove(int id);
+        Task<bool> Update(UpdateBookDto book);
     }
 }

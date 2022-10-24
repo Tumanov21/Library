@@ -36,12 +36,12 @@ namespace Library.API.Controllers
             => await _mediator.Send(new GetByIdBookQuery.Request { Id = Id });
 
         [HttpPost("Add")]
-        public async Task<Unit> Add(AddBookDto book)
-            => await _mediator.Send(new CreateBookCommand(book));
+        public async Task<CreateBookCommand.Response> Add(AddBookDto book)
+            => await _mediator.Send(new CreateBookCommand.Request() { AddBookDto = book });
 
         [HttpPut("Update")]
-        public async Task<Unit> Update(UpdateBookDto book)
-            => await _mediator.Send(new UpdateBookCommand(book));
+        public async Task<UpdateBookCommand.Response> Update(UpdateBookDto book)
+            => await _mediator.Send(new UpdateBookCommand.Request() { UpdateBookDto = book });
 
         [HttpDelete("Delete")]
         public async Task<Unit> Remove(int Id)

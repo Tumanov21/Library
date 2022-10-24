@@ -9,5 +9,16 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Books.Commands.Create
 {
-    public record CreateBookCommand(AddBookDto BookDto) :IRequest;
+    public class CreateBookCommand
+    {
+        public class Request : IRequest<Response>
+        {
+            public AddBookDto AddBookDto { get; set; }
+        }
+
+        public class Response
+        {
+            public bool Success { get; set; }
+        }
+    }
 }

@@ -26,26 +26,29 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
             _mapper = mapper;
         }
 
-        public async Task Add(AddBookDto BookDto)
+        public async Task<bool> Add(AddBookDto BookDto)
         {
             var mapping = _mapper.Map<Book>(BookDto);
             await _context.AddAsync(mapping);
             await _context.SaveChangesAsync();
+            return true;
         }
 
-        public async Task Update(UpdateBookDto BookDto)
+        public async Task<bool> Update(UpdateBookDto BookDto)
         {
             var model = await _context.Book.AsNoTracking().SingleOrDefaultAsync(c => c.Id == BookDto.Id);
             model = _mapper.Map<Book>(BookDto);
             _context.Book.Update(model);
             await _context.SaveChangesAsync();
+            return true;
         }
 
-        public async Task Remove(int id)
+        public async Task<bool> Remove(int id)
         {
             var model = await _context.Book.AsNoTracking().SingleOrDefaultAsync(c => c.Id == id);
             _context.Book.Remove(model);
             await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

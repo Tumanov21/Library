@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Books.Commands.Update
 {
-    public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand>
+    public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand.Request,UpdateBookCommand.Response>
     {
         private readonly IBookRepositoryCommand _bookRepositoryCommand;
 
@@ -17,10 +17,15 @@ namespace Library.Core.Books.Commands.Update
             _bookRepositoryCommand = bookRepositoryCommand;
         }
 
-        public async Task<Unit> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateBookCommand.Response> Handle(UpdateBookCommand.Request request, CancellationToken cancellationToken)
         {
-            await _bookRepositoryCommand.Update(request.Book);
-            return Unit.Value;
+            if (request.UpdateBookDto is null)
+                throw new ArgumentNullException();
+
+            return new UpdateBookCommand.Response()
+            {
+                Success = await _bookRepositoryCommand.Update(request.UpdateBookDto)
+            };
         }
     }
 }

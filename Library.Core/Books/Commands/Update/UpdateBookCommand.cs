@@ -9,5 +9,16 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Books.Commands.Update
 {
-    public record UpdateBookCommand(UpdateBookDto Book):IRequest;
+    public class UpdateBookCommand
+    {
+        public class Request : IRequest<Response>
+        {
+            public UpdateBookDto UpdateBookDto { get; set; }
+        }
+
+        public class Response
+        {
+            public bool Success { get; set; }
+        }
+    }
 }

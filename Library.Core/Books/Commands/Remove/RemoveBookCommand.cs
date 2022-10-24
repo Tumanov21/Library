@@ -7,5 +7,15 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Books.Commands.Remove
 {
-    public record RemoveBookCommand(int Id):IRequest;
+    public class RemoveBookCommand
+    {
+        public class Request : IRequest<Response>
+        {
+            public int Id { get; set; }
+        }
+        public class Response
+        {
+            public bool Success { get; set; }
+        }
+    }
 }
