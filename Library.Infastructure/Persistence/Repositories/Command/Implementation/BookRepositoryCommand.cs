@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Library.Infrastructure.Persistence.Dto.BookDto;
 using AutoMapper;
 using Library.Infrastructure.Persistence.Dtos.BookDtos;
+using Microsoft.Extensions.Logging;
 
 namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
 {
@@ -19,11 +20,13 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
     {
         private readonly EFContext _context;
         private readonly IMapper _mapper;
+        private readonly ILogger<BookRepositoryCommand> _logger;
 
-        public BookRepositoryCommand(EFContext context, IMapper mapper)
+        public BookRepositoryCommand(EFContext context, IMapper mapper, ILogger<BookRepositoryCommand> logger)
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<bool> Add(AddBookDto BookDto)
@@ -31,6 +34,7 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
             var mapping = _mapper.Map<Book>(BookDto);
             await _context.AddAsync(mapping);
             await _context.SaveChangesAsync();
+            _logger.LogInformation($"Add {@mapping.Id}");
             return true;
         }
 
@@ -40,6 +44,7 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
             model = _mapper.Map<Book>(BookDto);
             _context.Book.Update(model);
             await _context.SaveChangesAsync();
+            _logger.LogInformation($"Update{@model.Id}");
             return true;
         }
 
@@ -48,6 +53,7 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
             var model = await _context.Book.AsNoTracking().SingleOrDefaultAsync(c => c.Id == id);
             _context.Book.Remove(model);
             await _context.SaveChangesAsync();
+            _logger.LogInformation($"Remove{@model.Id}");
             return true;
         }
     }

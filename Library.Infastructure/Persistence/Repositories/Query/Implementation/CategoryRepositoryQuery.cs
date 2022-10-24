@@ -28,14 +28,15 @@ namespace Library.Infastructure.Persistence.Repositories.Query.Implementation
 
         public async Task<IReadOnlyCollection<GetCategoryDto>> GetAll()
         {
-            _logger.LogInformation("GetAll");
             var result = await _context.Category.AsNoTracking().ToListAsync();
+            _logger.LogInformation("GetAll");
             return _mapper.Map<IReadOnlyCollection<GetCategoryDto>>(result);
         }
 
         public async Task<GetCategoryDto?> GetById(int Id)
         {
             var result = await _context.Category.AsNoTracking().SingleOrDefaultAsync(c => c.Id == Id);
+            _logger.LogInformation($"GetById {result.Id}");
             return _mapper.Map<GetCategoryDto>(result);
         }
     }

@@ -34,15 +34,15 @@ namespace Library.API.Controllers
             => await _mediator.Send(new GetByIdCategoryQuery.Request { Id = id });
 
         [HttpPost("Add")]
-        public async Task<Unit> Add(AddCategoryDto categoryDto)
-            => await _mediator.Send(new CreateCategoryCommand(categoryDto));
+        public async Task<CreateCategoryCommand.Response> Add(AddCategoryDto categoryDto)
+            => await _mediator.Send(new CreateCategoryCommand.Request() { AddCategoryDto=categoryDto});
 
         [HttpPost("Update")]
-        public async Task<Unit> Update(UpdateCategoryDto categoryDto)
-            => await _mediator.Send(new UpdateCategoryCommand(categoryDto));
+        public async Task<UpdateCategoryCommand.Response> Update(UpdateCategoryDto categoryDto)
+            => await _mediator.Send(new UpdateCategoryCommand.Request() { UpdateCategoryDto = categoryDto});
 
         [HttpPost("Remove")]
-        public async Task<Unit> Delte(int id)
-            => await _mediator.Send(new RemoveCategoryCommand(id));
+        public async Task<RemoveCategoryCommand.Response> Delte(int id)
+            => await _mediator.Send(new RemoveCategoryCommand.Request() { Id = id});
     }
 }

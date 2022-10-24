@@ -11,6 +11,7 @@ using Library.Infastructure.Persistence.Repositories.Query.Interface;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using Library.Infrastructure.Persistence.Dtos.CategoryDtos;
+using Microsoft.Extensions.Logging;
 
 namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
 {
@@ -18,11 +19,13 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
     {
         private readonly EFContext _context;
         private readonly IMapper _mapper;
+        private readonly ILogger<CategoryRepositoryCommand> _logger;
 
-        public CategoryRepositoryCommand(EFContext context, IMapper mapper)
+        public CategoryRepositoryCommand(EFContext context, IMapper mapper, ILogger<CategoryRepositoryCommand> logger)
         {
             _context = context;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<bool> Add(AddCategoryDto category)
@@ -30,6 +33,7 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
             var result = _mapper.Map<Category>(category);
             await _context.Category.AddAsync(result);
             await _context.SaveChangesAsync();
+            _logger.LogInformation($"Add{@result.Id}");
             return true;
         }
 
@@ -39,6 +43,7 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
             model = _mapper.Map<Category>(category);
             _context.Category.Update(model);
             await _context.SaveChangesAsync();
+            _logger.LogInformation($"Update{@model.Id}");
             return true;
         }
 
@@ -47,6 +52,7 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
             var model = await _context.Category.AsNoTracking().SingleOrDefaultAsync(c => c.Id == Id);
             _context.Category.Remove(model);
             await _context.SaveChangesAsync();
+            _logger.LogInformation($"Remove{@model.Id}");
             return true;
         }
     }
