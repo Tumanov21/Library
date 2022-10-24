@@ -19,9 +19,17 @@ namespace Library.Core.Categories.Queries.GetById
         }
 
         public async Task<GetByIdCategoryQuery.Response> Handle(GetByIdCategoryQuery.Request request, CancellationToken cancellationToken)
-            => new GetByIdCategoryQuery.Response()
+        {
+            if (request.Id == 0 || request.Id < 0)
+                return new GetByIdCategoryQuery.Response()
+                {
+                    Category = null
+                };
+
+            return new GetByIdCategoryQuery.Response()
             {
                 Category = await _categoryRepositoryQuery.GetById(request.Id)
             };
+        }
     }
 }

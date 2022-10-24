@@ -9,5 +9,16 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Categories.Commands.Create
 {
-    public record CreateCategoryCommand(AddCategoryDto Category) :IRequest;
+    public class CreateCategoryCommand
+    {
+        public class Request : IRequest<Response>
+        {
+            public AddCategoryDto AddCategoryDto { get; set; }
+        }
+
+        public class Response
+        {
+            public bool Success { get; set; }
+        }
+    }
 }

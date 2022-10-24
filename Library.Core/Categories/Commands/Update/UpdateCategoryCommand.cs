@@ -9,5 +9,15 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Categories.Commands.Update
 {
-    public record UpdateCategoryCommand(UpdateCategoryDto Category):IRequest;
+    public class UpdateCategoryCommand
+    {
+        public class Request : IRequest<Response>
+        {
+            public UpdateCategoryDto UpdateCategoryDto { get; set; }
+        }
+        public class Response
+        {
+            public bool Success { get; set; }
+        }
+    }
 }

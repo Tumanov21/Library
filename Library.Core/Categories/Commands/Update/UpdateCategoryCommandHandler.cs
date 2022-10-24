@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Categories.Commands.Update
 {
-    public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand>
+    public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand.Request,UpdateCategoryCommand.Response>
     {
         private readonly ICategoryRepositoryCommand _categoryRepositoryCommand;
 
@@ -17,10 +17,15 @@ namespace Library.Core.Categories.Commands.Update
             _categoryRepositoryCommand = categoryRepositoryCommand;
         }
 
-        public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<UpdateCategoryCommand.Response> Handle(UpdateCategoryCommand.Request request, CancellationToken cancellationToken)
         {
-            await _categoryRepositoryCommand.Update(request.Category);
-            return Unit.Value;
+            if (request.UpdateCategoryDto is null)
+                throw new ArgumentNullException();
+
+            return new UpdateCategoryCommand.Response()
+            {
+                Success = await _categoryRepositoryCommand.Update(request.UpdateCategoryDto)
+            };
         }
     }
 }

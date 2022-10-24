@@ -7,5 +7,15 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Categories.Commands.Remove
 {
-    public record RemoveCategoryCommand(int id):IRequest;
+    public class RemoveCategoryCommand
+    {
+        public class Request : IRequest<Response>
+        {
+            public int Id { get; set; }
+        }
+        public class Response
+        {
+            public bool Success { get; set; }
+        }
+    }
 }

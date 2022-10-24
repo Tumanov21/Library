@@ -25,26 +25,29 @@ namespace Library.Infastructure.Persistence.Repositories.Command.Implementation
             _mapper = mapper;
         }
 
-        public async Task Add(AddCategoryDto category)
+        public async Task<bool> Add(AddCategoryDto category)
         {
             var result = _mapper.Map<Category>(category);
             await _context.Category.AddAsync(result);
             await _context.SaveChangesAsync();
+            return true;
         }
 
-        public async Task Update(UpdateCategoryDto category)
+        public async Task<bool> Update(UpdateCategoryDto category)
         {
             var model = await _context.Category.AsNoTracking().SingleOrDefaultAsync(c => c.Id == category.Id);
             model = _mapper.Map<Category>(category);
             _context.Category.Update(model);
             await _context.SaveChangesAsync();
+            return true;
         }
 
-        public async Task Remove(int Id)
+        public async Task<bool> Remove(int Id)
         {
             var model = await _context.Category.AsNoTracking().SingleOrDefaultAsync(c => c.Id == Id);
             _context.Category.Remove(model);
             await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

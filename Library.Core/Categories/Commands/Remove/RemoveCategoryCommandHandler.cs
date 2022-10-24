@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Library.Core.Categories.Commands.Remove
 {
-    public class RemoveCategoryCommandHandler : IRequestHandler<RemoveCategoryCommand>
+    public class RemoveCategoryCommandHandler : IRequestHandler<RemoveCategoryCommand.Request,RemoveCategoryCommand.Response>
     {
         private readonly ICategoryRepositoryCommand _categoryRepositoryCommand;
 
@@ -17,10 +17,18 @@ namespace Library.Core.Categories.Commands.Remove
             _categoryRepositoryCommand = categoryRepositoryCommand;
         }
 
-        public async Task<Unit> Handle(RemoveCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<RemoveCategoryCommand.Response> Handle(RemoveCategoryCommand.Request request, CancellationToken cancellationToken)
         {
-            await _categoryRepositoryCommand.Remove(request.id);
-            return Unit.Value;
+            if (request.Id == 0 || request.Id < 0)
+                return new RemoveCategoryCommand.Response()
+                {
+                    Success = false
+                };
+
+            return new RemoveCategoryCommand.Response()
+            {
+                Success = await _categoryRepositoryCommand.Remove(request.Id)
+            };
         }
     }
 }
