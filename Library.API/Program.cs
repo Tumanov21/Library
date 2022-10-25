@@ -1,4 +1,7 @@
+using FluentValidation;
 using Library.Core;
+using Library.Core.Books.Commands.Create;
+using Library.Core.Common.Behaivors;
 using Library.Infastructure.Persistence;
 using Library.Infastructure.Persistence.Repositories;
 using Library.Infrastructure.Persistence.Mapping;
@@ -34,6 +37,8 @@ builder.Services.AddMediatR(typeof(Anchor));
 //builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddRepositories();
 builder.Services.AddAutoMapper(typeof(BookProfile));
+builder.Services.AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() });
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaivor<,>));
 
 builder.Services.ConfigureSwaggerGen(c => c.SchemaGeneratorOptions.SchemaIdSelector = x => x.ToFriendlyName());
 var app = builder.Build();

@@ -1,5 +1,7 @@
 ﻿using AutoFixture;
 using AutoMapper;
+using FluentValidation;
+using FluentValidation.TestHelper;
 using Library.Core.Books.Commands.Create;
 using Library.Infastructure.Persistence.Repositories.Command.Interface;
 using Library.Infrastructure.Persistence.Dto.BookDto;
@@ -52,5 +54,18 @@ namespace Library.Core.Tests.BookTest
             Assert.NotNull(exception);
             _mockBookRepositoryCommand.Verify(_ => _.Add(It.IsAny<AddBookDto>()), Times.Never);
         }
+
+        //[Fact]
+        //[Theory]
+        //[InlineData("   ")]
+        //[InlineData("")]
+        //[InlineData(null)]
+        //public async Task test(string testing)
+        //{
+        //    var book = new AddBookDto() { Title = testing };
+        //    var validator = new CreateBookCommandValidator();
+
+        //    var result = validator.(book);
+        //}
     }
 }
