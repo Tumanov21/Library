@@ -4,6 +4,7 @@ using Library.Core.Books.Commands.Create;
 using Library.Core.Common.Behaivors;
 using Library.Infastructure.Persistence;
 using Library.Infastructure.Persistence.Repositories;
+using Library.Infrastructure;
 using Library.Infrastructure.Persistence.Mapping;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -20,23 +21,14 @@ builder.Host.UseSerilog((context, config) =>
     config.ReadFrom.Configuration(context.Configuration));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Library API", Version = "v1" });
-});
+builder.Services.AddSwaggerGen(c
+    => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Library API", Version = "v1" }));
 
-builder.Services.AddDbContext<EFContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Connect"));
-});
+builder.Services.ConfigureApplicationServices();
+builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 
-builder.Services.AddMediatR(typeof(Anchor));
-//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-builder.Services.AddRepositories();
-builder.Services.AddAutoMapper(typeof(BookProfile));
 builder.Services.AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() });
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaivor<,>));
 
